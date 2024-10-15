@@ -41,7 +41,7 @@ void ingresarNombresProductos(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_C
     for (int i = 0; i < cantidadProductos; i++)
     {
         fflush(stdin);
-        printf("Ingrese el nombre del producto %d:   ", i+1);
+        printf("Ingrese el nombre del producto %d:\t", i+1);
         fflush(stdin);
         fgets(nombreProducto[i], CANTIDAD_CARACTERES, stdin);
 
@@ -59,7 +59,7 @@ void ingresarPreciosProductos(  float preciosProductos[CANTIDAD_PRODUCTOS], int 
 {
     for (int i = 0; i < cantidadProductos; i++)
     {
-        printf("Ingrese el precio del producto %d (%s) (precio>0 y precio<=10000):   ", i+1, nombreProducto);
+        printf("Ingrese el precio del producto %d (%s) (precio>0 y precio<=10000):\t", i+1, nombreProducto[i]);
         scanf("%f", &preciosProductos[i]);
 
         if (preciosProductos[i]<=0 || preciosProductos[i]>10000)
@@ -131,15 +131,14 @@ void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES]
     {
         encontrado = 0;
 
-        printf("Ingrese el nombre del producto a buscar:   ");
+        printf("\nIngrese el nombre del producto a buscar:   ");
         scanf("%s", &productoBuscado);
-        printf("%s\n", productoBuscado);
 
         for (int i = 0; i < cantidadProductos; i++)
         {
             if (strcmp(nombreProducto[i], productoBuscado) == 0) //strcmp compara 2 cadenas y devulve 0 si son iguales
             {
-                printf("El precio del producto %d (%s) es:   %.2f\n", i + 1, nombreProducto[i], preciosProductos[i]);
+                printf("El precio del producto %d (%s) es:\t%.2f\n", i + 1, nombreProducto[i], preciosProductos[i]);
                 encontrado = 1;
             }
         }
