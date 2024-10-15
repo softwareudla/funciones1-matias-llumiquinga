@@ -21,6 +21,7 @@ int main (int argc, char *argv[])
 {
     char nombresProductos[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES];
     float preciosProductos[CANTIDAD_PRODUCTOS];
+    float precioTotal=0, min=0, max=0, promedio=0;
 
     int cantidadProductos=0;
 
@@ -32,7 +33,12 @@ int main (int argc, char *argv[])
     
     ingresarPreciosProductos(preciosProductos, cantidadProductos, nombresProductos);
 
-    
+    precioTotal= obtenerPrecioTotal(preciosProductos, cantidadProductos);
+    min=obtenerPrecioMin(preciosProductos,cantidadProductos);
+    max=obtenerPrecioMax(preciosProductos, cantidadProductos);
+    promedio=obtenerPromedio(preciosProductos,cantidadProductos);
+
+
 
 
 
@@ -42,6 +48,10 @@ int main (int argc, char *argv[])
         printf("%.2f\n", preciosProductos[i]);
     }
     
+    printf("Total: %.2f\n", precioTotal);
+    printf("Minimo: %.2f\n", min);
+    printf("Maximo: %.2f\n", max);
+    printf("Promedio: %.2f\n", promedio);
     
     
 

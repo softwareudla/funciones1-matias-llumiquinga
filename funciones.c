@@ -69,3 +69,54 @@ void ingresarPreciosProductos(  float preciosProductos[CANTIDAD_PRODUCTOS], int 
         }
     }
 }
+
+
+
+float obtenerPrecioTotal(float preciosProductos[CANTIDAD_PRODUCTOS], int cantidadProductos)
+{
+    float precioTotal=0;
+
+    for (int i = 0; i < cantidadProductos; i++)
+    {
+        precioTotal=precioTotal + preciosProductos[i];
+    }
+    return precioTotal;
+}
+
+float obtenerPrecioMin(float preciosProductos[CANTIDAD_PRODUCTOS], int cantidadProductos)
+{
+    float minimo=10000;
+
+    for (int i = 0; i < cantidadProductos; i++)
+    {
+        if (preciosProductos[i]<minimo)
+        {
+            minimo=preciosProductos[i];
+        }
+    }
+
+    return minimo;
+}
+
+float obtenerPrecioMax(float preciosProductos[CANTIDAD_PRODUCTOS], int cantidadProductos)
+{
+    float maximo=0;
+
+    for (int i = 0; i < cantidadProductos; i++)
+    {
+        if (preciosProductos[i]>maximo)
+        {
+            maximo=preciosProductos[i];
+        }
+    }
+
+    return maximo;
+}
+
+float obtenerPromedio(float preciosProductos[CANTIDAD_PRODUCTOS], int cantidadProductos)
+{
+    float promedio = obtenerPrecioTotal(preciosProductos, cantidadProductos);
+    promedio= promedio/cantidadProductos;
+    return promedio;
+
+}
