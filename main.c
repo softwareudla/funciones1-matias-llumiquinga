@@ -20,12 +20,18 @@ void ingresarNombresProductos(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_C
 int main (int argc, char *argv[])
 {
     char nombresProductos[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES];
+    float preciosProductos[CANTIDAD_PRODUCTOS];
+
     int cantidadProductos=0;
 
+    inicializarPreciosProductos(preciosProductos);
 
     cantidadProductos =ingresarCantidadProductos();    
 
     ingresarNombresProductos(nombresProductos, cantidadProductos);
+    
+    ingresarPreciosProductos(preciosProductos, cantidadProductos, nombresProductos);
+
     
 
 
@@ -33,6 +39,7 @@ int main (int argc, char *argv[])
     for (int i = 0; i < cantidadProductos; i++)
     {
         printf("%s\n", nombresProductos[i]);
+        printf("%.2f\n", preciosProductos[i]);
     }
     
     
