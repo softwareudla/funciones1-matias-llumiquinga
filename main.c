@@ -42,55 +42,11 @@ int main (int argc, char *argv[])
     promedio=obtenerPromedio(preciosProductos,cantidadProductos);
 
 
-    for (int i = 0; i < (4*22); i++)
-    {
-        printf("-");
-    }
-    printf("\n");
-    printf("\n**********PRODUCTOS**********\n");
-    for (int i = 0; i < (4*22); i++)
-    {
-        printf("-");
-    }
-
-    printf("\n");
     
-    for (int i = 0; i < cantidadProductos; i++)
-    {
-        printf("%d.\t%-22s$%-22.2f\n", i+1, nombresProductos[i], preciosProductos[i]);
-    }
 
-    for (int i = 0; i < (4*22); i++)
-    {
-        printf("-");
-    }
+    imprimirProductosPrecios(cantidadProductos, nombresProductos, preciosProductos);
 
-    printf("\n");
-
-
-
-    printf("\n");
-
-
-    printf("%-3s%-22s%-3s%-22s%-3s%-22s%-3s%-22s\n", "|", "Total:","|", "Minimo:", "|", "Maximo:", "|", "Promedio:");
-
-    /*for (int i = 0; i < (4*22); i++)
-    {
-        printf("-");
-    }
-    printf("\n");*/
-
-    printf("%-4s%-21.2f%-4s%-21.2f%-4s%-21.2f%-4s%-21.2f\n","|  $", precioTotal, "|  $", min, "|  $", max, "|  $", promedio);
-
-    printf("\n");
-
-    for (int i = 0; i < (4*22); i++)
-    {
-        printf("-");
-    }
-
-    printf("\n");
-
+    imprimirCalculos(precioTotal,min,max,promedio,cantidadProductos,nombresProductos, preciosProductos);
 
     buscarProducto(nombresProductos, preciosProductos, cantidadProductos);
     

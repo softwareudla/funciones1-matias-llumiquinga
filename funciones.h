@@ -16,3 +16,13 @@ void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES]
                     float preciosProductos[CANTIDAD_PRODUCTOS], 
                     int cantidadProductos);
 
+void imprimirProductosPrecios(  int cantidadProductos, char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], 
+                                float preciosProductos[CANTIDAD_PRODUCTOS]);
+
+void imprimirCalculos(  float precioTotal, float min, float max, float promedio,
+                        int cantidadProductos, 
+                        char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], 
+                        float preciosProductos[CANTIDAD_PRODUCTOS]);
+
+
+void imprimirSeparadores();

@@ -127,11 +127,14 @@ void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES]
     char productoBuscado[CANTIDAD_CARACTERES];
     int encontrado, continuar = 0;
 
+    printf("BUSQUEDA DE PRODUCTOS\n");
+    imprimirSeparadores();
+
     do
     {
         encontrado = 0;
 
-        printf("\nIngrese el nombre del producto a buscar:   ");
+        printf("Ingrese el nombre del producto a buscar:   ");
         scanf("%s", &productoBuscado);
 
         for (int i = 0; i < cantidadProductos; i++)
@@ -150,4 +153,87 @@ void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES]
         printf("Presione 0 para buscar otro producto y cualquier numero para terminar:   ");
         scanf("%d", &continuar);
     } while (continuar == 0);
+}
+
+
+void imprimirProductosPrecios(  int cantidadProductos, char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], 
+                                float preciosProductos[CANTIDAD_PRODUCTOS])
+{
+    printf("\n");
+    imprimirSeparadores();
+
+    printf("PRODUCTOS\n");
+    
+    imprimirSeparadores();
+    
+    for (int i = 0; i < cantidadProductos; i++)
+    {
+        printf("%d.\t%-22s$%-22.2f\n", i+1, nombreProducto[i], preciosProductos[i]);
+    }
+
+    imprimirSeparadores();
+}
+
+void imprimirCalculos(  float precioTotal, float min, float max, float promedio,
+                        int cantidadProductos, 
+                        char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], 
+                        float preciosProductos[CANTIDAD_PRODUCTOS])
+{
+
+    char nombresProductosBaratos[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES];
+    int acumBaratos=0;
+    char nombresProductosCaros[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES];
+    int acumCaros=0;
+
+    printf("CALCULOS\n");
+    
+    imprimirSeparadores();
+
+    printf("%-3s%-22s%-3s%-22s%-3s%-22s%-3s%-22s\n", "|", "Total:","|", "Precio P. Mas Barato:", "|", "Precio P. Mas Caro:", "|", "Promedio:");
+
+    printf("%-4s%-21.2f%-4s%-21.2f%-4s%-21.2f%-4s%-21.2f\n","|  $", precioTotal, "|  $", min, "|  $", max, "|  $", promedio);
+
+    
+
+    for (int i = 0; i < cantidadProductos; i++)
+    {
+        if (preciosProductos[i]==min)
+        {
+            strcpy(nombresProductosBaratos[acumBaratos], nombreProducto[i]);
+            acumBaratos++;
+        }
+        if (preciosProductos[i]==max)
+        {
+            strcpy(nombresProductosCaros[acumCaros], nombreProducto[i]);
+            acumCaros++;
+        }
+    }
+
+    printf("\n%-3sP. Mas Barato(s) (%d):\n","|", acumBaratos);
+
+    for (int i = 0; i < acumBaratos; i++)
+    {
+        printf("%-3s%-22s\n","|",nombresProductosBaratos[i]);        
+    }
+
+    printf("\n%-3sP. Mas Caro(s) (%d):\n","|", acumCaros);
+    for (int i = 0; i < acumCaros; i++)
+    {
+        printf("%-3s%-22s\n","|",nombresProductosCaros[i]);        
+    }
+    
+
+
+
+    imprimirSeparadores();
+}
+
+
+void imprimirSeparadores()
+{
+    for (int i = 0; i < (4*25); i++)
+    {
+        printf("-");
+    }
+    printf("\n");
 }
