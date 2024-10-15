@@ -118,5 +118,37 @@ float obtenerPromedio(float preciosProductos[CANTIDAD_PRODUCTOS], int cantidadPr
     float promedio = obtenerPrecioTotal(preciosProductos, cantidadProductos);
     promedio= promedio/cantidadProductos;
     return promedio;
+}
 
+void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], 
+                    float preciosProductos[CANTIDAD_PRODUCTOS], 
+                    int cantidadProductos)
+{
+    char productoBuscado[CANTIDAD_CARACTERES];
+    int encontrado, continuar = 0;
+
+    do
+    {
+        encontrado = 0;
+
+        printf("Ingrese el nombre del producto a buscar:   ");
+        scanf("%s", &productoBuscado);
+        printf("%s\n", productoBuscado);
+
+        for (int i = 0; i < cantidadProductos; i++)
+        {
+            if (strcmp(nombreProducto[i], productoBuscado) == 0) //strcmp compara 2 cadenas y devulve 0 si son iguales
+            {
+                printf("El precio del producto %d (%s) es:   %.2f\n", i + 1, nombreProducto[i], preciosProductos[i]);
+                encontrado = 1;
+            }
+        }
+        if (encontrado == 0)
+        {
+            printf("No se encontro el producto buscado\n");
+        }
+
+        printf("Presione 0 para buscar otro producto y cualquier numero para terminar:   ");
+        scanf("%d", &continuar);
+    } while (continuar == 0);
 }

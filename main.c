@@ -53,6 +53,8 @@ int main (int argc, char *argv[])
     printf("Maximo: %.2f\n", max);
     printf("Promedio: %.2f\n", promedio);
     
+
+    buscarProducto(nombresProductos, preciosProductos, cantidadProductos);
     
 
 

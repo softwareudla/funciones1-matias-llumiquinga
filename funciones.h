@@ -12,3 +12,7 @@ float obtenerPrecioMin(float preciosProductos[CANTIDAD_PRODUCTOS], int cantidadP
 float obtenerPrecioMax(float preciosProductos[CANTIDAD_PRODUCTOS], int cantidadProductos);
 float obtenerPromedio(float preciosProductos[CANTIDAD_PRODUCTOS], int cantidadProductos);
 
+void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], 
+                    float preciosProductos[CANTIDAD_PRODUCTOS], 
+                    int cantidadProductos);
+
