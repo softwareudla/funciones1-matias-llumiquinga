@@ -128,10 +128,10 @@ void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES]
     int encontrado, continuar = 0;
 
     printf("BUSQUEDA DE PRODUCTOS\n");
-    imprimirSeparadores();
 
     do
     {
+        imprimirSeparadores();
         encontrado = 0;
 
         printf("Ingrese el nombre del producto a buscar:   ");
@@ -150,8 +150,9 @@ void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES]
             printf("No se encontro el producto buscado\n");
         }
 
-        printf("Presione 0 para buscar otro producto y cualquier numero para terminar:   ");
-        scanf("%d", &continuar);
+        printf("Presione 0 para buscar otro producto y cualquier numero entero para terminar:\t");
+        scanf("%f", &continuar);
+
     } while (continuar == 0);
 }
 
