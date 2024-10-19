@@ -43,7 +43,7 @@ void ingresarNombresProductos(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_C
     {
         fflush(stdin);
         printf("Ingrese el nombre del producto %d:\t", i+1);
-        scanf("%s", &nombreProducto[i]);
+        scanf("%s", nombreProducto[i]);
         /*fgets(nombreProducto[i], CANTIDAD_CARACTERES, stdin);
 
         longitudCadena= strlen(nombreProducto[i]);
