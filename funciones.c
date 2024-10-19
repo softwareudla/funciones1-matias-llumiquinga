@@ -151,7 +151,7 @@ void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES]
         }
 
         printf("Presione 0 para buscar otro producto y cualquier numero entero para terminar:\t");
-        scanf("%f", &continuar);
+        scanf("%d", &continuar);
 
     } while (continuar == 0);
 }
