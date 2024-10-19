@@ -35,21 +35,22 @@ int ingresarCantidadProductos()
 
 void ingresarNombresProductos(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], int cantidadProductos)
 {
+    /*int longitudCadena=0;
     int c, longitudCadena=0;
-    while ((c = getchar()) != '\n' && c != EOF);
+    while ((c = getchar()) != '\n' && c != EOF);*/
 
     for (int i = 0; i < cantidadProductos; i++)
     {
         fflush(stdin);
         printf("Ingrese el nombre del producto %d:\t", i+1);
-        fflush(stdin);
-        fgets(nombreProducto[i], CANTIDAD_CARACTERES, stdin);
+        scanf("%s", &nombreProducto[i]);
+        /*fgets(nombreProducto[i], CANTIDAD_CARACTERES, stdin);
 
         longitudCadena= strlen(nombreProducto[i]);
         if (nombreProducto[i][longitudCadena-1] == '\n')
         {
             nombreProducto[i][longitudCadena-1] = '\0';
-        }
+        }*/
 
     }
 }
@@ -135,8 +136,9 @@ void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES]
         encontrado = 0;
 
         printf("Ingrese el nombre del producto a buscar:   ");
-        scanf("%s", &productoBuscado);
+        scanf("%s", productoBuscado);
 
+        printf("\n");
         for (int i = 0; i < cantidadProductos; i++)
         {
             if (strcmp(nombreProducto[i], productoBuscado) == 0) //strcmp compara 2 cadenas y devulve 0 si son iguales
@@ -149,6 +151,8 @@ void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES]
         {
             printf("No se encontro el producto buscado\n");
         }
+        printf("\n");
+
 
         printf("Presione 0 para buscar otro producto y cualquier numero entero para terminar:\t");
         scanf("%d", &continuar);
@@ -210,14 +214,14 @@ void imprimirCalculos(  float precioTotal, float min, float max, float promedio,
         }
     }
 
-    printf("\n%-3sP. Mas Barato(s) (%d):\n","|", acumBaratos);
+    printf("\n%-3sP. Mas Barato(s) (Cantidad: %d):\n","|", acumBaratos);
 
     for (int i = 0; i < acumBaratos; i++)
     {
         printf("%-3s%-22s\n","|",nombresProductosBaratos[i]);        
     }
 
-    printf("\n%-3sP. Mas Caro(s) (%d):\n","|", acumCaros);
+    printf("\n%-3sP. Mas Caro(s) (Cantidad: %d):\n","|", acumCaros);
     for (int i = 0; i < acumCaros; i++)
     {
         printf("%-3s%-22s\n","|",nombresProductosCaros[i]);        
