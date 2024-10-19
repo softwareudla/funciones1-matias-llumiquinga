@@ -21,25 +21,26 @@ int main (int argc, char *argv[])
 {
     char nombresProductos[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES];
     float preciosProductos[CANTIDAD_PRODUCTOS];
-    float precioTotal=0, min=0, max=0, promedio=0;
+    float precioTotal=0, min=10000, max=0, promedio=0;
 
     int cantidadProductos=0;
-
-
 
 
     inicializarPreciosProductos(preciosProductos);
 
     cantidadProductos =ingresarCantidadProductos();    
 
-    ingresarNombresProductos(nombresProductos, cantidadProductos);
-    
-    ingresarPreciosProductos(preciosProductos, cantidadProductos, nombresProductos);
+    for (int i = 0; i < cantidadProductos; i++)
+    {
+        ingresarNombresProductos(nombresProductos,i);
+        ingresarPreciosProductos(preciosProductos, i, nombresProductos);
 
-    precioTotal= obtenerPrecioTotal(preciosProductos, cantidadProductos);
-    min=obtenerPrecioMin(preciosProductos,cantidadProductos);
-    max=obtenerPrecioMax(preciosProductos, cantidadProductos);
-    promedio=obtenerPromedio(preciosProductos,cantidadProductos);
+        precioTotal= obtenerPrecioTotal(precioTotal,preciosProductos, i);
+        min=obtenerPrecioMin(min, preciosProductos,i);
+        max=obtenerPrecioMax(max, preciosProductos, i);
+    }
+    
+    promedio=obtenerPromedio(promedio,cantidadProductos);
 
 
     

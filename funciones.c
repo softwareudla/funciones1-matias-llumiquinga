@@ -13,7 +13,6 @@ void inicializarPreciosProductos(float preciosProductos[CANTIDAD_PRODUCTOS])
     }
 }
 
-
 int ingresarCantidadProductos()
 {
     int cantidadProductos=0;
@@ -33,91 +32,57 @@ int ingresarCantidadProductos()
 }
 
 
-void ingresarNombresProductos(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], int cantidadProductos)
+
+void ingresarNombresProductos(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], int i)
 {
-    /*int longitudCadena=0;
-    int c, longitudCadena=0;
-    while ((c = getchar()) != '\n' && c != EOF);*/
-
-    for (int i = 0; i < cantidadProductos; i++)
-    {
-        fflush(stdin);
-        printf("Ingrese el nombre del producto %d:\t", i+1);
-        scanf("%s", nombreProducto[i]);
-        /*fgets(nombreProducto[i], CANTIDAD_CARACTERES, stdin);
-
-        longitudCadena= strlen(nombreProducto[i]);
-        if (nombreProducto[i][longitudCadena-1] == '\n')
-        {
-            nombreProducto[i][longitudCadena-1] = '\0';
-        }*/
-
-    }
+    fflush(stdin);
+    printf("Ingrese el nombre del producto %d:\t", i + 1);
+    scanf("%s", nombreProducto[i]);
 }
 
-void ingresarPreciosProductos(  float preciosProductos[CANTIDAD_PRODUCTOS], int cantidadProductos, 
-                                char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES])
+void ingresarPreciosProductos(float preciosProductos[CANTIDAD_PRODUCTOS], int i, char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES])
 {
-    for (int i = 0; i < cantidadProductos; i++)
-    {
-        printf("Ingrese el precio del producto %d (%s) (precio>0 y precio<=10000):\t", i+1, nombreProducto[i]);
-        scanf("%f", &preciosProductos[i]);
 
-        if (preciosProductos[i]<=0 || preciosProductos[i]>10000)
-        {
-            printf("Valor ingresado fuera de rango\n");
-            i--;
-        }
+    printf("Ingrese el precio del producto %d (%s) (precio>0 y precio<=10000):\t", i + 1, nombreProducto[i]);
+    scanf("%f", &preciosProductos[i]);
+
+    if (preciosProductos[i] <= 0 || preciosProductos[i] > 10000)
+    {
+        printf("Valor ingresado fuera de rango\n");
+        i--;
     }
 }
 
 
 
-float obtenerPrecioTotal(float preciosProductos[CANTIDAD_PRODUCTOS], int cantidadProductos)
+float obtenerPrecioTotal(float precioTotal, float preciosProductos[CANTIDAD_PRODUCTOS], int i)
 {
-    float precioTotal=0;
-
-    for (int i = 0; i < cantidadProductos; i++)
-    {
-        precioTotal=precioTotal + preciosProductos[i];
-    }
+    precioTotal = precioTotal + preciosProductos[i];
     return precioTotal;
 }
 
-float obtenerPrecioMin(float preciosProductos[CANTIDAD_PRODUCTOS], int cantidadProductos)
+float obtenerPrecioMin(float min, float preciosProductos[CANTIDAD_PRODUCTOS], int i)
 {
-    float minimo=10000;
-
-    for (int i = 0; i < cantidadProductos; i++)
+    if (preciosProductos[i] < min)
     {
-        if (preciosProductos[i]<minimo)
-        {
-            minimo=preciosProductos[i];
-        }
+        min = preciosProductos[i];
     }
-
-    return minimo;
+    return min;
 }
 
-float obtenerPrecioMax(float preciosProductos[CANTIDAD_PRODUCTOS], int cantidadProductos)
+float obtenerPrecioMax(float max, float preciosProductos[CANTIDAD_PRODUCTOS], int i)
 {
-    float maximo=0;
-
-    for (int i = 0; i < cantidadProductos; i++)
+    if (preciosProductos[i] > max)
     {
-        if (preciosProductos[i]>maximo)
-        {
-            maximo=preciosProductos[i];
-        }
+        max = preciosProductos[i];
     }
-
-    return maximo;
+    return max;
 }
 
-float obtenerPromedio(float preciosProductos[CANTIDAD_PRODUCTOS], int cantidadProductos)
+float obtenerPromedio(float precioTotal, int cantiddProductos)
 {
-    float promedio = obtenerPrecioTotal(preciosProductos, cantidadProductos);
-    promedio= promedio/cantidadProductos;
+    float promedio=0;
+    promedio = precioTotal/cantiddProductos;
     return promedio;
 }
 
@@ -198,7 +163,6 @@ void imprimirCalculos(  float precioTotal, float min, float max, float promedio,
 
     printf("%-4s%-21.2f%-4s%-21.2f%-4s%-21.2f%-4s%-21.2f\n","|  $", precioTotal, "|  $", min, "|  $", max, "|  $", promedio);
 
-    
 
     for (int i = 0; i < cantidadProductos; i++)
     {
@@ -227,9 +191,6 @@ void imprimirCalculos(  float precioTotal, float min, float max, float promedio,
         printf("%-3s%-22s\n","|",nombresProductosCaros[i]);        
     }
     
-
-
-
     imprimirSeparadores();
 }
 

@@ -3,14 +3,14 @@
 
 void inicializarPreciosProductos(float preciosProductos[CANTIDAD_PRODUCTOS]);
 int ingresarCantidadProductos();
-void ingresarNombresProductos(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], int cantidadProductos);
-void ingresarPreciosProductos(  float preciosProductos[CANTIDAD_PRODUCTOS], int cantidadProductos, 
-                                char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES]);
+void ingresarNombresProductos(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], int i);
+void ingresarPreciosProductos(float preciosProductos[CANTIDAD_PRODUCTOS], int i, char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES]);
 
-float obtenerPrecioTotal(float preciosProductos[CANTIDAD_PRODUCTOS], int cantidadProductos);
-float obtenerPrecioMin(float preciosProductos[CANTIDAD_PRODUCTOS], int cantidadProductos);
-float obtenerPrecioMax(float preciosProductos[CANTIDAD_PRODUCTOS], int cantidadProductos);
-float obtenerPromedio(float preciosProductos[CANTIDAD_PRODUCTOS], int cantidadProductos);
+
+float obtenerPrecioTotal(float precioTotal, float preciosProductos[CANTIDAD_PRODUCTOS], int i);
+float obtenerPrecioMin(float min, float preciosProductos[CANTIDAD_PRODUCTOS], int i);
+float obtenerPrecioMax(float max, float preciosProductos[CANTIDAD_PRODUCTOS], int i);
+float obtenerPromedio(float precioTotal, int cantiddProductos);
 
 void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], 
                     float preciosProductos[CANTIDAD_PRODUCTOS], 
