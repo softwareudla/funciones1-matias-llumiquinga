@@ -205,6 +205,15 @@ void imprimirCalculos(  float precioTotal, float min, float max, float promedio,
     }
 }
 
+void imprimirSeparadores()
+{
+    for (int i = 0; i < (4*25); i++)
+    {
+        printf("-");
+    }
+    printf("\n");
+}
+
 int menuFinal(  char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], 
                 float preciosProductos[CANTIDAD_PRODUCTOS], 
                 int cantidadProductos)
@@ -219,38 +228,53 @@ int menuFinal(  char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES],
         continuarF = 0;
         continuarI = 0;
 
-        printf("PRESIONE:\n1.Buscar Producto\n2.Mostrar Productos\n3.Mostrar Resultados\n4.Terminar\n%-5s", ">>");
+        printf("PRESIONE:\n1.Ingresar Nuevo Producto\n2.Buscar Producto\n3.Mostrar Productos\n4.Mostrar Resultados\n5.Terminar\n%-5s", ">>");
         scanf("%f", &continuarF);
         continuarI = (int)continuarF;
 
-        if (continuarI != 1 && continuarI != 2 && continuarI != 3 && continuarI != 4 || continuarF != continuarI)
+        if (continuarI != 1 && continuarI != 2 && continuarI != 3 && continuarI != 4 && continuarI != 5 || continuarF != continuarI)
         {
             printf("-Opcion NO valida-\n");
         }
 
-    } while (continuarF != continuarI || continuarI != 1 && continuarI != 2 && continuarI != 3 && continuarI != 4);
+    } while (continuarF != continuarI || continuarI != 1 && continuarI != 2 && continuarI != 3 && continuarI != 4 && continuarI != 5);
 
 
     switch (continuarI)
     {
     case 1:
         imprimirSeparadores();
+        printf("INGRESAR NUEVO PRODUCTO\n");
+        imprimirSeparadores();
+
+        if (cantidadProductos<10)
+        {
+            cantidadProductos++;
+            ingresarNombresProductos(nombreProducto, cantidadProductos-1);
+            ingresarPreciosProductos(preciosProductos, cantidadProductos-1, nombreProducto);
+        }else
+        {
+            cantidadProductos=10;
+            printf("Ha alcanzado el maximo de productos a ingresar\n");
+        }   
+        break;
+    case 2:
+        imprimirSeparadores();
         printf("BUSQUEDA DE PRODUCTOS\n");
         imprimirSeparadores();
 
         buscarProducto(nombreProducto, preciosProductos, cantidadProductos);
         break;
-    case 2:
+    case 3:
         imprimirSeparadores();
         printf("PRODUCTOS\n");
         imprimirSeparadores();
 
-        imprimirProductosPrecios(cantidadProductos,nombreProducto,preciosProductos);
+        imprimirProductosPrecios(cantidadProductos, nombreProducto, preciosProductos);
         break;
-
-    case 3:
+    case 4:
         imprimirSeparadores();
-        printf("CALCULOS\n");
+        printf("RESULTADOS\n");
         imprimirSeparadores();
 
         for (int i = 0; i < cantidadProductos; i++)
@@ -262,21 +286,11 @@ int menuFinal(  char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES],
 
         precioP = obtenerPromedio(precioT, cantidadProductos);
 
-        imprimirCalculos(precioT,precioMin,precioMax,precioP,cantidadProductos,nombreProducto,preciosProductos);
+        imprimirCalculos(precioT, precioMin, precioMax, precioP, cantidadProductos, nombreProducto, preciosProductos);
         break;
-        
     default:
         break;
     }
 
     return continuarI;
-}
-
-void imprimirSeparadores()
-{
-    for (int i = 0; i < (4*25); i++)
-    {
-        printf("-");
-    }
-    printf("\n");
 }

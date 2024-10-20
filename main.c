@@ -9,7 +9,7 @@ int main (int argc, char *argv[])
 {
     char nombresProductos[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES];
     float preciosProductos[CANTIDAD_PRODUCTOS];
-    int cantidadProductos=0, continuar=0;
+    int cantidadProductos=0, continuar=0, cantProductosNuevos=0;
 
 
     cantidadProductos =ingresarCantidadProductos();    
@@ -30,9 +30,17 @@ int main (int argc, char *argv[])
     do
     {
         continuar=menuFinal(nombresProductos,preciosProductos,cantidadProductos);
-    } while (continuar!=4);
-    
-    
+
+        if (continuar==1 && cantidadProductos<10)
+        {
+            cantidadProductos++;
+        }
+        else if (continuar==1 && cantidadProductos>=10)
+        {
+            cantidadProductos=10;
+        }
+
+    } while (continuar!=5);
     
     return 0;
 }
