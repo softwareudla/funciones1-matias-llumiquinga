@@ -2,8 +2,8 @@
 #include <string.h>
 #include "funciones.h"
 
-#define CANTIDAD_PRODUCTOS 10
-#define CANTIDAD_CARACTERES 22
+//#define CANTIDAD_PRODUCTOS 10
+//#define CANTIDAD_CARACTERES 22
 
 void inicializarPreciosProductos(float preciosProductos[CANTIDAD_PRODUCTOS])
 {
@@ -22,7 +22,7 @@ int ingresarCantidadProductos()
     {
         cantidadProductosF=0;
         cantidadProductosI=0;
-        printf("Ingrese la cantidad de productos a registrar (1-10):\n>>\t");
+        printf("Ingrese la cantidad de productos a registrar (1-10):\n%-5s",">>");
         scanf("%f", &cantidadProductosF);
         cantidadProductosI=(int)cantidadProductosF;
 
@@ -43,21 +43,26 @@ int ingresarCantidadProductos()
 
 void ingresarNombresProductos(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], int i)
 {
-    int longCadena=0;
+    size_t longCadena=0;
+    
     do
-    {
-        while (getchar() != '\n'); // Descartar todos los caracteres hasta '\n' - Limpiar el buffer de entrada
+    {     
+        strcpy(nombreProducto[i],"");
+        fflush(stdin);
         printf("Ingrese el NOMBRE del producto %d (MAX: 20 caracteres):\t", i + 1);
-        fgets(nombreProducto[i], CANTIDAD_CARACTERES, stdin);
+        while (nombreProducto[i][0]=='\0'||nombreProducto[i][0]=='\n')
+        {
+            fgets(nombreProducto[i], CANTIDAD_CARACTERES, stdin);
+        }
         longCadena = strlen(nombreProducto[i]);
 
         if (nombreProducto[i][longCadena-1] != '\n')
         {
             printf("Error, el nombre tiene mas de 20 caracteres\n");
-        }
+            while (getchar() != '\n');    // Descartar todos los caracteres hasta '\n' - Limpiar el buffer de entrada
+        }      
         
     } while (nombreProducto[i][longCadena-1] != '\n');
-    
     nombreProducto[i][longCadena-1]='\0';
 }
 
@@ -74,9 +79,6 @@ void ingresarPreciosProductos(float preciosProductos[CANTIDAD_PRODUCTOS], int i,
         }
 
     } while (preciosProductos[i] <= 0 || preciosProductos[i] > 10000);
-    
-
-    
 }
 
 
@@ -112,6 +114,8 @@ float obtenerPromedio(float precioTotal, int cantiddProductos)
     return promedio;
 }
 
+
+
 void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], 
                     float preciosProductos[CANTIDAD_PRODUCTOS], 
                     int cantidadProductos)
@@ -130,15 +134,19 @@ void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES]
         longCadena=0;
         do
         {
-            while (getchar() != '\n'); // Descartar todos los caracteres hasta '\n' - Limpiar el buffer de entrada
-
+            strcpy(productoBuscado,""); 
+            fflush(stdin);
             printf("Ingrese el nombre del producto a buscar:\t");
-            fgets(productoBuscado, CANTIDAD_CARACTERES, stdin);
+            while (productoBuscado[0] == '\0' || productoBuscado[0] == '\n')
+            {
+                fgets(productoBuscado, CANTIDAD_CARACTERES, stdin);
+            }
             longCadena = strlen(productoBuscado);
 
             if (productoBuscado[longCadena - 1] != '\n')
             {
                 printf("Error, el nombre tiene mas de 20 caracteres\n");
+                while (getchar() != '\n'); // Descartar todos los caracteres hasta '\n' - Limpiar el buffer de entrada
             }
 
         } while (productoBuscado[longCadena - 1] != '\n');
@@ -167,19 +175,15 @@ void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES]
             continuarF=0;
             continuarI = 0;
 
-            printf("PRESIONE:\n1.Buscar otro producto\n2.Terminar\n>>\t");
+            printf("PRESIONE:\n1.Buscar otro producto\n2.Terminar\n%-5s",">>");
             scanf("%f", &continuarF);
             continuarI=(int)continuarF;
 
-            if (continuarI!=1 && continuarI!=2)
+            if (continuarI!=1 && continuarI!=2 || continuarF!=continuarI)
             {
                 printf("Opcion no valida\n");
             }
-            if (continuarF!=continuarI)
-            {
-                printf("Opcion no valida. No ingrese numeros decimales\n");
-            }
-            
+
         } while (continuarF!=continuarI || continuarI!=1 && continuarI!=2);
 
     } while (continuarI == 1);
