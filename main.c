@@ -1,12 +1,3 @@
-/*Una tienda desea implementar un programa en C que permita gestionar su inventario de productos. 
-El programa debe recibir los nombres de los productos y sus precios, para luego realizar varias operaciones, tales como:
-
-Calcular el precio total del inventario.
-Encontrar el producto más caro y el más barato.
-Calcular el precio promedio de todos los productos.
-Buscar un producto por su nombre y mostrar su precio.
-El número máximo de productos que el sistema debe manejar es 10.*/
-
 #include <stdio.h>
 #include <string.h>
 #include "funciones.h"
@@ -23,10 +14,7 @@ int main (int argc, char *argv[])
 
     int cantidadProductos=0;
 
-
-    inicializarPreciosProductos(preciosProductos);
    
-
     cantidadProductos =ingresarCantidadProductos();    
 
     imprimirSeparadores();

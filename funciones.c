@@ -5,14 +5,6 @@
 //#define CANTIDAD_PRODUCTOS 10
 //#define CANTIDAD_CARACTERES 22
 
-void inicializarPreciosProductos(float preciosProductos[CANTIDAD_PRODUCTOS])
-{
-    for (int i = 0; i < CANTIDAD_PRODUCTOS; i++)
-    {
-        preciosProductos[i]=0;
-    }
-}
-
 int ingresarCantidadProductos()
 {
     float cantidadProductosF;
@@ -43,11 +35,11 @@ int ingresarCantidadProductos()
 
 void ingresarNombresProductos(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], int i)
 {
-    size_t longCadena=0;
+    int longCadena=0;
     
     do
     {     
-        strcpy(nombreProducto[i],"");
+        strcpy(nombreProducto[i],""); //strcpy en C sirve para copiar el contenido de una cadena de caracteres en otra sobreescribe
         fflush(stdin);
         printf("Ingrese el NOMBRE del producto %d (MAX: 20 caracteres):\t", i + 1);
         while (nombreProducto[i][0]=='\0'||nombreProducto[i][0]=='\n')
@@ -68,6 +60,7 @@ void ingresarNombresProductos(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_C
 
 void ingresarPreciosProductos(float preciosProductos[CANTIDAD_PRODUCTOS], int i, char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES])
 {
+    preciosProductos[i]=0;
     do
     {
         printf("Ingrese el PRECIO del producto %d (%s) (precio>0 y precio<=10000):\t", i + 1, nombreProducto[i]);
