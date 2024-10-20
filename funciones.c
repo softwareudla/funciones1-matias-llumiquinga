@@ -207,11 +207,11 @@ void imprimirCalculos(  float precioTotal, float min, float max, float promedio,
 
 int menuFinal(  char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], 
                 float preciosProductos[CANTIDAD_PRODUCTOS], 
-                int cantidadProductos,
-                float precioTotal, float min, float max, float promedio)
+                int cantidadProductos)
 {
     int continuarI;
     float continuarF;
+    float precioT=0, precioMin=10000, precioMax=0, precioP=0;
 
     imprimirSeparadores();
     do
@@ -253,7 +253,16 @@ int menuFinal(  char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES],
         printf("CALCULOS\n");
         imprimirSeparadores();
 
-        imprimirCalculos(precioTotal,min,max,promedio,cantidadProductos,nombreProducto,preciosProductos);
+        for (int i = 0; i < cantidadProductos; i++)
+        {
+            precioT = obtenerPrecioTotal(precioT, preciosProductos, i);
+            precioMin = obtenerPrecioMin(precioMin, preciosProductos, i);
+            precioMax = obtenerPrecioMax(precioMax, preciosProductos, i);
+        }
+
+        precioP = obtenerPromedio(precioT, cantidadProductos);
+
+        imprimirCalculos(precioT,precioMin,precioMax,precioP,cantidadProductos,nombreProducto,preciosProductos);
         break;
         
     default:
