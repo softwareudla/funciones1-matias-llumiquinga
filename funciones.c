@@ -114,91 +114,51 @@ void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES]
                     int cantidadProductos)
 {
     char productoBuscado[CANTIDAD_CARACTERES];
-    int encontrado, continuarI, longCadena;
-    float continuarF;
-
-    printf("BUSQUEDA DE PRODUCTOS\n");
+    int encontrado=0, longCadena=0;
 
     do
     {
-        imprimirSeparadores();
-        encontrado = 0;
-
-        longCadena=0;
-        do
+        strcpy(productoBuscado, "");
+        fflush(stdin);
+        printf("Ingrese el nombre del producto a buscar:\t");
+        while (productoBuscado[0] == '\0' || productoBuscado[0] == '\n')
         {
-            strcpy(productoBuscado,""); 
-            fflush(stdin);
-            printf("Ingrese el nombre del producto a buscar:\t");
-            while (productoBuscado[0] == '\0' || productoBuscado[0] == '\n')
-            {
-                fgets(productoBuscado, CANTIDAD_CARACTERES, stdin);
-            }
-            longCadena = strlen(productoBuscado);
-
-            if (productoBuscado[longCadena - 1] != '\n')
-            {
-                printf("Error, el nombre tiene mas de 20 caracteres\n");
-                while (getchar() != '\n'); // Descartar todos los caracteres hasta '\n' - Limpiar el buffer de entrada
-            }
-
-        } while (productoBuscado[longCadena - 1] != '\n');
-
-        productoBuscado[longCadena-1]='\0';
-
-
-
-        printf("\n");
-        for (int i = 0; i < cantidadProductos; i++)
-        {
-            if (strcmp(nombreProducto[i], productoBuscado) == 0) //strcmp compara 2 cadenas y devulve 0 si son iguales
-            {
-                printf("El precio del producto %d (%s) es:\t%.2f\n", i + 1, nombreProducto[i], preciosProductos[i]);
-                encontrado = 1;
-            }
+            fgets(productoBuscado, CANTIDAD_CARACTERES, stdin);
         }
-        if (encontrado == 0)
+        longCadena = strlen(productoBuscado);
+
+        if (productoBuscado[longCadena - 1] != '\n')
         {
-            printf("No se encontro el producto buscado\n");
+            printf("Error, el nombre tiene mas de 20 caracteres\n");
+            while (getchar() != '\n'); // Descartar todos los caracteres hasta '\n' - Limpiar el buffer de entrada
         }
-        printf("\n");
+    } while (productoBuscado[longCadena - 1] != '\n');
 
-        do
+    productoBuscado[longCadena - 1] = '\0';
+
+    printf("\n");
+
+    for (int i = 0; i < cantidadProductos; i++)
+    {
+        if (strcmp(nombreProducto[i], productoBuscado) == 0) // strcmp compara 2 cadenas y devulve 0 si son iguales
         {
-            continuarF=0;
-            continuarI = 0;
-
-            printf("PRESIONE:\n1.Buscar otro producto\n2.Terminar\n%-5s",">>");
-            scanf("%f", &continuarF);
-            continuarI=(int)continuarF;
-
-            if (continuarI!=1 && continuarI!=2 || continuarF!=continuarI)
-            {
-                printf("Opcion no valida\n");
-            }
-
-        } while (continuarF!=continuarI || continuarI!=1 && continuarI!=2);
-
-    } while (continuarI == 1);
+            printf("El precio del producto %d (%s) es:\t$%.2f\n", i + 1, nombreProducto[i], preciosProductos[i]);
+            encontrado = 1;
+        }
+    }
+    if (encontrado == 0)
+    {
+        printf("No se encontro el producto buscado\n");
+    }
 }
-
 
 void imprimirProductosPrecios(  int cantidadProductos, char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], 
                                 float preciosProductos[CANTIDAD_PRODUCTOS])
 {
-    printf("\n");
-    imprimirSeparadores();
-
-    printf("PRODUCTOS\n");
-    
-    imprimirSeparadores();
-    
     for (int i = 0; i < cantidadProductos; i++)
     {
         printf("%d.\t%-22s$%-22.2f\n", i+1, nombreProducto[i], preciosProductos[i]);
     }
-
-    imprimirSeparadores();
 }
 
 void imprimirCalculos(  float precioTotal, float min, float max, float promedio,
@@ -211,10 +171,6 @@ void imprimirCalculos(  float precioTotal, float min, float max, float promedio,
     int acumBaratos=0;
     char nombresProductosCaros[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES];
     int acumCaros=0;
-
-    printf("CALCULOS\n");
-    
-    imprimirSeparadores();
 
     printf("%-3s%-22s%-3s%-22s%-3s%-22s%-3s%-22s\n", "|", "Total:","|", "Precio P. Mas Barato:", "|", "Precio P. Mas Caro:", "|", "Promedio:");
 
@@ -247,10 +203,65 @@ void imprimirCalculos(  float precioTotal, float min, float max, float promedio,
     {
         printf("%-3s%-22s\n","|",nombresProductosCaros[i]);        
     }
-    
-    imprimirSeparadores();
 }
 
+int menuFinal(  char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], 
+                float preciosProductos[CANTIDAD_PRODUCTOS], 
+                int cantidadProductos,
+                float precioTotal, float min, float max, float promedio)
+{
+    int continuarI;
+    float continuarF;
+
+    imprimirSeparadores();
+    do
+    {
+        continuarF = 0;
+        continuarI = 0;
+
+        printf("PRESIONE:\n1.Buscar Producto\n2.Mostrar Productos\n3.Mostrar Resultados\n4.Terminar\n%-5s", ">>");
+        scanf("%f", &continuarF);
+        continuarI = (int)continuarF;
+
+        if (continuarI != 1 && continuarI != 2 && continuarI != 3 && continuarI != 4 || continuarF != continuarI)
+        {
+            printf("-Opcion NO valida-\n");
+        }
+
+    } while (continuarF != continuarI || continuarI != 1 && continuarI != 2 && continuarI != 3 && continuarI != 4);
+
+
+    switch (continuarI)
+    {
+    case 1:
+        imprimirSeparadores();
+        printf("BUSQUEDA DE PRODUCTOS\n");
+        imprimirSeparadores();
+
+        buscarProducto(nombreProducto, preciosProductos, cantidadProductos);
+        break;
+    case 2:
+        imprimirSeparadores();
+        printf("PRODUCTOS\n");
+        imprimirSeparadores();
+
+        imprimirProductosPrecios(cantidadProductos,nombreProducto,preciosProductos);
+        break;
+
+    case 3:
+        imprimirSeparadores();
+        printf("CALCULOS\n");
+        imprimirSeparadores();
+
+        imprimirCalculos(precioTotal,min,max,promedio,cantidadProductos,nombreProducto,preciosProductos);
+        break;
+        
+    default:
+        break;
+    }
+
+    return continuarI;
+}
 
 void imprimirSeparadores()
 {

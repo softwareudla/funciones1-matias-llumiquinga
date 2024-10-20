@@ -23,5 +23,9 @@ void imprimirCalculos(  float precioTotal, float min, float max, float promedio,
                         char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], 
                         float preciosProductos[CANTIDAD_PRODUCTOS]);
 
+int menuFinal(  char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], 
+                float preciosProductos[CANTIDAD_PRODUCTOS], 
+                int cantidadProductos,
+                float precioTotal, float min, float max, float promedio);
 
 void imprimirSeparadores();

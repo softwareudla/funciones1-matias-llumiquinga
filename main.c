@@ -10,7 +10,7 @@ int main (int argc, char *argv[])
     char nombresProductos[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES];
     float preciosProductos[CANTIDAD_PRODUCTOS];
     float precioTotal=0, min=10000, max=0, promedio=0;
-    int cantidadProductos=0;
+    int cantidadProductos=0, continuar=0;
 
 
     cantidadProductos =ingresarCantidadProductos();    
@@ -37,11 +37,12 @@ int main (int argc, char *argv[])
     
     promedio=obtenerPromedio(precioTotal,cantidadProductos);    
 
-    imprimirProductosPrecios(cantidadProductos, nombresProductos, preciosProductos);
-
-    imprimirCalculos(precioTotal,min,max,promedio,cantidadProductos,nombresProductos, preciosProductos);
-
-    buscarProducto(nombresProductos, preciosProductos, cantidadProductos);
+    do
+    {
+        continuar=menuFinal(nombresProductos,preciosProductos,cantidadProductos,precioTotal,min,max,promedio);
+    } while (continuar!=4);
+    
+    
     
     return 0;
 }
