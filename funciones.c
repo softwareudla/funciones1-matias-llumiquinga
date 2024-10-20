@@ -15,42 +15,68 @@ void inicializarPreciosProductos(float preciosProductos[CANTIDAD_PRODUCTOS])
 
 int ingresarCantidadProductos()
 {
-    int cantidadProductos=0;
+    float cantidadProductosF;
+    int cantidadProductosI;
+
     do
     {
-        printf("Ingrese la cantidad de productos a registrar (1-10):\n");
-        scanf("%d", &cantidadProductos);
+        cantidadProductosF=0;
+        cantidadProductosI=0;
+        printf("Ingrese la cantidad de productos a registrar (1-10):\n>>\t");
+        scanf("%f", &cantidadProductosF);
+        cantidadProductosI=(int)cantidadProductosF;
 
-        if (cantidadProductos<=0 || cantidadProductos>10)
+        if (cantidadProductosF<=0 || cantidadProductosF>10)
         {
             printf("Valor ingresado fuera de rango\n");
         }
+        if (cantidadProductosF!=cantidadProductosI)
+        {
+            printf("No ingrese numeros decimales\n");
+        }
         
-    } while (cantidadProductos<=0 || cantidadProductos>10);
+    } while (cantidadProductosF<=0 || cantidadProductosF>10 || cantidadProductosF!=cantidadProductosI);
 
-    return cantidadProductos;
+    return cantidadProductosI;
 }
-
 
 
 void ingresarNombresProductos(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], int i)
 {
-    fflush(stdin);
-    printf("Ingrese el nombre del producto %d:\t", i + 1);
-    scanf("%s", nombreProducto[i]);
+    int longCadena=0;
+    do
+    {
+        while (getchar() != '\n'); // Descartar todos los caracteres hasta '\n' - Limpiar el buffer de entrada
+        printf("Ingrese el NOMBRE del producto %d (MAX: 20 caracteres):\t", i + 1);
+        fgets(nombreProducto[i], CANTIDAD_CARACTERES, stdin);
+        longCadena = strlen(nombreProducto[i]);
+
+        if (nombreProducto[i][longCadena-1] != '\n')
+        {
+            printf("Error, el nombre tiene mas de 20 caracteres\n");
+        }
+        
+    } while (nombreProducto[i][longCadena-1] != '\n');
+    
+    nombreProducto[i][longCadena-1]='\0';
 }
 
 void ingresarPreciosProductos(float preciosProductos[CANTIDAD_PRODUCTOS], int i, char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES])
 {
-
-    printf("Ingrese el precio del producto %d (%s) (precio>0 y precio<=10000):\t", i + 1, nombreProducto[i]);
-    scanf("%f", &preciosProductos[i]);
-
-    if (preciosProductos[i] <= 0 || preciosProductos[i] > 10000)
+    do
     {
-        printf("Valor ingresado fuera de rango\n");
-        i--;
-    }
+        printf("Ingrese el PRECIO del producto %d (%s) (precio>0 y precio<=10000):\t", i + 1, nombreProducto[i]);
+        scanf("%f", &preciosProductos[i]);
+
+        if (preciosProductos[i] <= 0 || preciosProductos[i] > 10000)
+        {
+            printf("Valor ingresado fuera de rango\n");
+        }
+
+    } while (preciosProductos[i] <= 0 || preciosProductos[i] > 10000);
+    
+
+    
 }
 
 
@@ -91,7 +117,8 @@ void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES]
                     int cantidadProductos)
 {
     char productoBuscado[CANTIDAD_CARACTERES];
-    int encontrado, continuar = 0;
+    int encontrado, continuarI, longCadena;
+    float continuarF;
 
     printf("BUSQUEDA DE PRODUCTOS\n");
 
@@ -100,8 +127,25 @@ void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES]
         imprimirSeparadores();
         encontrado = 0;
 
-        printf("Ingrese el nombre del producto a buscar:   ");
-        scanf("%s", productoBuscado);
+        longCadena=0;
+        do
+        {
+            while (getchar() != '\n'); // Descartar todos los caracteres hasta '\n' - Limpiar el buffer de entrada
+
+            printf("Ingrese el nombre del producto a buscar:\t");
+            fgets(productoBuscado, CANTIDAD_CARACTERES, stdin);
+            longCadena = strlen(productoBuscado);
+
+            if (productoBuscado[longCadena - 1] != '\n')
+            {
+                printf("Error, el nombre tiene mas de 20 caracteres\n");
+            }
+
+        } while (productoBuscado[longCadena - 1] != '\n');
+
+        productoBuscado[longCadena-1]='\0';
+
+
 
         printf("\n");
         for (int i = 0; i < cantidadProductos; i++)
@@ -118,11 +162,27 @@ void buscarProducto(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES]
         }
         printf("\n");
 
+        do
+        {
+            continuarF=0;
+            continuarI = 0;
 
-        printf("Presione 0 para buscar otro producto y cualquier numero entero para terminar:\t");
-        scanf("%d", &continuar);
+            printf("PRESIONE:\n1.Buscar otro producto\n2.Terminar\n>>\t");
+            scanf("%f", &continuarF);
+            continuarI=(int)continuarF;
 
-    } while (continuar == 0);
+            if (continuarI!=1 && continuarI!=2)
+            {
+                printf("Opcion no valida\n");
+            }
+            if (continuarF!=continuarI)
+            {
+                printf("Opcion no valida. No ingrese numeros decimales\n");
+            }
+            
+        } while (continuarF!=continuarI || continuarI!=1 && continuarI!=2);
+
+    } while (continuarI == 1);
 }
 
 

@@ -14,8 +14,6 @@ El número máximo de productos que el sistema debe manejar es 10.*/
 #define CANTIDAD_PRODUCTOS 10
 #define CANTIDAD_CARACTERES 22
 
-int ingresarCantidadProductos();
-void ingresarNombresProductos(char nombreProducto[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES], int cantidadProductos);
 
 int main (int argc, char *argv[])
 {
@@ -27,6 +25,7 @@ int main (int argc, char *argv[])
 
 
     inicializarPreciosProductos(preciosProductos);
+   
 
     cantidadProductos =ingresarCantidadProductos();    
 
@@ -40,7 +39,7 @@ int main (int argc, char *argv[])
         max=obtenerPrecioMax(max, preciosProductos, i);
     }
     
-    promedio=obtenerPromedio(promedio,cantidadProductos);
+    promedio=obtenerPromedio(precioTotal,cantidadProductos);
 
 
     
