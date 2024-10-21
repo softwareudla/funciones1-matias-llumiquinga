@@ -9,7 +9,7 @@ int main (int argc, char *argv[])
 {
     char nombresProductos[CANTIDAD_PRODUCTOS][CANTIDAD_CARACTERES];
     float preciosProductos[CANTIDAD_PRODUCTOS];
-    int cantidadProductos=0, continuar=0, cantProductosNuevos=0;
+    int cantidadProductos=0, continuar=0;
 
 
     cantidadProductos =ingresarCantidadProductos();    
